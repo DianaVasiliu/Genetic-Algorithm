@@ -56,6 +56,31 @@ if __name__ == "__main__":
     noOfSubintervals = (domain[1] - domain[0]) * pow(10, precision)
     l = math.ceil(math.log2(noOfSubintervals))
 
+    # choosing elitist criterion
+    isElitist = input("Do you take into account the elitist criterion? (Y/N)")
+    while isElitist not in ['Y', 'y', 'N', 'n']:
+        print("Wrong choice, try again (Y/N)", end=" ")
+        isElitist = input()
+
+    if isElitist in ['Y', 'y']:
+        isElitist = True
+    else:
+        isElitist = False
+
+    # choosing mutation type
+    # mutationType = 1 => rare mutation
+        # on each chromosome, at most one position changes "probably"
+    # mutationType = 2 =>
+        # on each chromosome, at most all positions change "probably"
+    print("1. Type 1 of mutation (rare mutation): at most ONE position changes \"probably\"")
+    print("2. Type 2 of mutation: at most ALL positions change \"probably\"")
+
+    mutationType = input("Choose the type of mutation to use (1/2)")
+    while mutationType not in ['1', '2']:
+        print("Wrong choice, try again (1/2)", end=' ')
+        mutationType = input()
+    mutationType = int(mutationType)
+
     print("---------------- STEP 1 ----------------")
 
     # ###########################################
@@ -104,7 +129,6 @@ if __name__ == "__main__":
     # ##########################################################
     # ###### chromosome selection for the next generation ######
     # ##########################################################
-    isElitist = True
     selectedChromosomes, nextGenChromosomes, output = \
         mkSel.makeSelection(selectionIntervals, functionValues, isElitist)
 
@@ -190,11 +214,6 @@ if __name__ == "__main__":
     # ######################
     outputFile.write("Probability of mutation for each gene " + str(pm) + "\n")
 
-    # mutationType = 1 => rare mutation
-        # on each chromosome, at most one position changes "probably"
-    # mutationType = 2 =>
-        # on each chromosome, at most all positions change "probably"
-    mutationType = 1
     output = mutation.mutation(selectedChromosomesStrings, pm, mutationType)
     outputFile.write(output + "\n\n")
 
