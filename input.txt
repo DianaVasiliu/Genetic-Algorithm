@@ -1,0 +1,7 @@
+Population dimension: 50
+Function domain: [-4, 3]
+Function coefficients: 1 3 -4 7
+Precision: 6
+Probability of crossing over: 0.2
+Probability of mutation: 0.001
+Number of stages: 100
