@@ -43,7 +43,11 @@ def makeNewPopulation(chromosomes, values, fvalues, idx):
 
 
 def f(x):
-    return coeff[0] * x ** 3 + coeff[1] * x ** 2 + coeff[2] * x + coeff[3]
+    res = 0
+    coeffNr = len(coeff)
+    for i in range(coeffNr):
+        res += coeff[i] * x ** (coeffNr - i - 1)
+    return res
 
 
 if __name__ == "__main__":
